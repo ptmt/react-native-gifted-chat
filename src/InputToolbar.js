@@ -70,10 +70,11 @@ const styles = StyleSheet.create({
   },
   primary: {
     flexDirection: 'row',
+    minHeight:48,
     alignItems: 'flex-end',
   },
   accessory: {
-    height: 44,
+    height: 36,
   },
 });
 

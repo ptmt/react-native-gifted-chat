@@ -22,12 +22,14 @@ export default class Time extends React.Component {
 const containerStyle = {
   marginLeft: 10,
   marginRight: 10,
-  marginBottom: 5,
+  marginTop:8,
+  marginBottom: 4,
 };
 
 const textStyle = {
   fontSize: 10,
   backgroundColor: 'transparent',
+  fontFamily:'Cabin_Bold',
   textAlign: 'right',
 };
 
@@ -37,7 +39,7 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: '#aaa',
+      color: '#90a5ae',
       ...textStyle,
     },
   }),
@@ -46,7 +48,7 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: '#fff',
+      color: '#90a5ae',
       ...textStyle,
     },
   }),

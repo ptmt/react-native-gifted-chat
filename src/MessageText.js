@@ -67,7 +67,8 @@ export default class MessageText extends React.Component {
 }
 
 const textStyle = {
-  fontSize: 16,
+  fontSize: 15,
+  fontFamily:'Cabin_Regular',
   lineHeight: 20,
   marginTop: 5,
   marginBottom: 5,
@@ -80,11 +81,11 @@ const styles = {
     container: {
     },
     text: {
-      color: 'black',
+      color: '#13222a',
       ...textStyle,
     },
     link: {
-      color: 'black',
+      color: '#13222a',
       textDecorationLine: 'underline',
     },
   }),

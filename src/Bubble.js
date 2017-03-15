@@ -129,12 +129,12 @@ export default class Bubble extends React.Component {
               {this.renderCustomView()}
               {this.renderMessageImage()}
               {this.renderMessageText()}
-              <View style={styles.bottom}>
-                {this.renderTime()}
-                {this.renderTicks()}
-              </View>
             </View>
           </TouchableWithoutFeedback>
+        </View>
+        <View style={styles.bottom}>
+          {this.renderTime()}
+          {this.renderTicks()}
         </View>
       </View>
     );
@@ -145,17 +145,19 @@ const styles = {
   left: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-start',
+      alignItems: 'flex-start'
     },
     wrapper: {
-      backgroundColor: '#f0f0f0',
+      backgroundColor: '#ececec',
       marginRight: 60,
       minHeight: 20,
+      minWidth:100,
+      paddingRight:8,
       justifyContent: 'flex-end',
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
-      borderBottomLeftRadius: 32,
-      borderBottomRightRadius: 0,
+      borderBottomRightRadius: 32,
+      borderBottomLeftRadius: 0,
     },
     containerToNext: {
     },
@@ -170,11 +172,13 @@ const styles = {
     wrapper: {
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
+      paddingLeft:8,
       borderBottomLeftRadius: 32,
       borderBottomRightRadius: 0,
-      backgroundColor: '#0084ff',
+      backgroundColor: '#1ab7f3',
       marginLeft: 60,
       minHeight: 20,
+      minWidth:100,
       justifyContent: 'flex-end',
     },
     containerToNext: {
@@ -189,11 +193,12 @@ const styles = {
   tick: {
     fontSize: 10,
     backgroundColor: 'transparent',
-    color: 'white',
+    color: '#1ab7f3',
   },
   tickView: {
     flexDirection: 'row',
     marginRight: 10,
+    marginTop:8
   }
 };
 
