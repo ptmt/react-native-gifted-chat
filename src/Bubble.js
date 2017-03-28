@@ -152,7 +152,7 @@ const styles = {
       marginRight: 60,
       minHeight: 20,
       minWidth:100,
-      paddingRight:8,
+      paddingRight:0,
       justifyContent: 'flex-end',
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
@@ -172,7 +172,7 @@ const styles = {
     wrapper: {
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
-      paddingLeft:8,
+      paddingLeft:0,
       borderBottomLeftRadius: 32,
       borderBottomRightRadius: 0,
       backgroundColor: '#1ab7f3',

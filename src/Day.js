@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
-    marginBottom: 10,
+    marginBottom: 13,
   },
   wrapper: {
     // backgroundColor: '#ccc',
@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
   },
   text: {
     backgroundColor: 'transparent',
-    color: '#b2b2b2',
-    fontSize: 12,
-    fontWeight: '600',
+    color: '#90a5ae',
+    fontSize: 10,
+    fontFamily: 'Cabin_Bold',
   },
 });
 

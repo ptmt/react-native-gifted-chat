@@ -70,10 +70,10 @@ const textStyle = {
   fontSize: 15,
   fontFamily:'Cabin_Regular',
   lineHeight: 20,
-  marginTop: 5,
-  marginBottom: 5,
-  marginLeft: 10,
-  marginRight: 10,
+  marginTop: 4,
+  marginBottom: 8,
+  marginLeft: 16,
+  marginRight: 16,
 };
 
 const styles = {
