@@ -20,7 +20,7 @@ export default class Time extends React.Component {
 }
 
 const containerStyle = {
-  marginLeft: 10,
+  marginLeft: 5,
   marginRight: 10,
   marginTop:8,
   marginBottom: 4,
@@ -31,6 +31,7 @@ const textStyle = {
   backgroundColor: 'transparent',
   fontFamily:'Cabin_Bold',
   textAlign: 'right',
+  color: '#90a5ae',
 };
 
 const styles = {
@@ -39,16 +40,15 @@ const styles = {
       ...containerStyle,
     },
     text: {
-      color: '#90a5ae',
       ...textStyle,
     },
   }),
   right: StyleSheet.create({
     container: {
       ...containerStyle,
+      marginRight: 0,
     },
     text: {
-      color: '#90a5ae',
       ...textStyle,
     },
   }),
