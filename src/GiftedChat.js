@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import ActionSheet from '@exponent/react-native-action-sheet';
+import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
 import uuid from 'uuid';
 
@@ -26,6 +26,7 @@ import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
+import GiftedChatInteractionManager from './GiftedChatInteractionManager';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -35,7 +36,6 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
   android: 41,
 });
 const MAX_COMPOSER_HEIGHT = 100;
-const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
 class GiftedChat extends React.Component {
   constructor(props) {
@@ -195,10 +195,7 @@ class GiftedChat extends React.Component {
   // TODO
   // setMinInputToolbarHeight
   getMinInputToolbarHeight() {
-    if (this.props.renderAccessory) {
-      return MIN_INPUT_TOOLBAR_HEIGHT * 2;
-    }
-    return MIN_INPUT_TOOLBAR_HEIGHT;
+    return this.props.renderAccessory ? this.props.minInputToolbarHeight * 2 : this.props.minInputToolbarHeight;
   }
 
   prepareMessagesContainerHeight(value) {
@@ -257,6 +254,7 @@ class GiftedChat extends React.Component {
   }
 
   scrollToBottom(animated = true) {
+    if (this._messageContainerRef === null) { return }
     this._messageContainerRef.scrollTo({
       y: 0,
       animated,
@@ -321,7 +319,7 @@ class GiftedChat extends React.Component {
     this.setState({
       text: '',
       composerHeight: MIN_COMPOSER_HEIGHT,
-      messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight() + this.props.bottomOffset),
+      messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight() + this.getBottomOffset()),
     });
   }
 
@@ -354,7 +352,7 @@ class GiftedChat extends React.Component {
       return;
     }
     this.setMaxHeight(layout.height);
-    InteractionManager.runAfterInteractions(() => {
+    GiftedChatInteractionManager.runAfterInteractions(() => {
       this.setState({
         isInitialized: true,
         text: '',
@@ -490,6 +488,7 @@ GiftedChat.defaultProps = {
   renderTime: null,
   user: {},
   bottomOffset: 0,
+  minInputToolbarHeight: 44,
   isLoadingEarlier: false,
   messageIdGenerator: () => uuid.v4()
 };
@@ -521,6 +520,7 @@ GiftedChat.propTypes = {
   renderTime: React.PropTypes.func,
   user: React.PropTypes.object,
   bottomOffset: React.PropTypes.number,
+  minInputToolbarHeight: React.PropTypes.number,
   isLoadingEarlier: React.PropTypes.bool,
   messageIdGenerator: React.PropTypes.func,
   keyboardShouldPersistTaps: React.PropTypes.oneOf(['always', 'never', 'handled']),
@@ -538,6 +538,7 @@ export {
   InputToolbar,
   LoadEarlier,
   Message,
+  MessageContainer,
   Send,
   Time,
   GiftedAvatar,
