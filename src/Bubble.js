@@ -189,6 +189,8 @@ const styles = {
   bottom: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    marginTop:4,
+    marginBottom:4
   },
   tick: {
     fontSize: 10,

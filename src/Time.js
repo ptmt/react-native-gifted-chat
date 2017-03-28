@@ -38,6 +38,7 @@ const styles = {
   left: StyleSheet.create({
     container: {
       ...containerStyle,
+      marginLeft: 16,
     },
     text: {
       ...textStyle,
