@@ -241,7 +241,7 @@ class GiftedChat extends React.Component {
 
   onKeyboardDidShow(e) {
     if (Platform.OS === 'android') {
-      this.onKeyboardWillShow(e);
+      //this.onKeyboardWillShow(e);
     }
     this.setIsTypingDisabled(false);
   }
