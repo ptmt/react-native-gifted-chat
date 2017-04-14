@@ -46,17 +46,17 @@ export default class Composer extends React.Component {
 const styles = StyleSheet.create({
   textInput: {
     flex: 1,
-    marginLeft: 10,
+    paddingLeft: 10,
     fontSize: 16,
     color:'#13222a',
     backgroundColor:'#e8f7fd',
     lineHeight: 16,
     fontFamily:'Cabin_Medium',
-    marginTop: Platform.select({
+    paddingTop: Platform.select({
       ios: 6,
       android: 0,
     }),
-    marginBottom: Platform.select({
+    paddingBottom: Platform.select({
       ios: 5,
       android: 3,
     }),
