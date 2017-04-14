@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     color:'#13222a',
+    backgroundColor:'#e8f7fd',
     lineHeight: 16,
     fontFamily:'Cabin_Medium',
     marginTop: Platform.select({
