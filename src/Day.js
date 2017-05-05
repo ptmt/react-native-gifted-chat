@@ -44,8 +44,7 @@ const styles = StyleSheet.create({
   text: {
     backgroundColor: 'transparent',
     color: '#90a5ae',
-    fontSize: 10,
-    fontFamily: 'Cabin_Bold',
+    fontSize: 10
   },
 });
 

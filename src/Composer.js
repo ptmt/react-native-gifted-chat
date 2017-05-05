@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color:'#13222a',
     lineHeight: 16,
-    fontFamily:'Cabin_Medium',
     marginTop: Platform.select({
       ios: 6,
       android: 0,

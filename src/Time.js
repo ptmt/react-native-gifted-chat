@@ -29,7 +29,6 @@ const containerStyle = {
 const textStyle = {
   fontSize: 10,
   backgroundColor: 'transparent',
-  fontFamily:'Cabin_Bold',
   textAlign: 'right',
   color: '#90a5ae',
 };
