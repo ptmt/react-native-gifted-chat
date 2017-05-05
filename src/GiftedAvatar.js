@@ -33,13 +33,15 @@ export default class GiftedAvatar extends React.Component {
     // inspired by https://github.com/wbinnssmith/react-user-avatar
     // colors from https://flatuicolors.com/
     const colors = [
-      '#e67e22', // carrot
-      '#2ecc71', // emerald
-      '#3498db', // peter river
-      '#8e44ad', // wisteria
-      '#e74c3c', // alizarin
-      '#1abc9c', // turquoise
-      '#2c3e50', // midnight blue
+      '#e57373',
+      '#1ab7f3',
+      '#ffab40',
+      '#90a5ae',
+      '#3e4e56',
+      '#1d313c',
+      '#b1c5cd',
+      '#c7d8de',
+      '#4abf30'
     ];
 
     this.avatarColor = colors[sumChars % colors.length];
