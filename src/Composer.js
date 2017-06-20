@@ -47,16 +47,16 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     marginLeft: 10,
-    fontSize: 16,
+    fontSize: 14,
     color:'#13222a',
     lineHeight: 16,
     marginTop: Platform.select({
       ios: 6,
-      android: 0,
+      android: 7,
     }),
     marginBottom: Platform.select({
       ios: 5,
-      android: 3,
+      android: 8,
     }),
   },
 });
@@ -66,7 +66,7 @@ Composer.defaultProps = {
   },
   composerHeight: Platform.select({
     ios: 33,
-    android: 41,
+    android: 32,
   }), // TODO SHARE with GiftedChat.js and tests
   text: '',
   placeholder: 'Type a message...',
