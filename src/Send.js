@@ -35,7 +35,7 @@ export default class Send extends React.Component {
 const styles = StyleSheet.create({
   container: {
     height: 44,
-    marginBottom:12
+    marginBottom:12,
     justifyContent: 'flex-end',
   },
   text: {
