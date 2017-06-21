@@ -58,6 +58,15 @@ const styles = StyleSheet.create({
       ios: 5,
       android: 8,
     }),
+    height: 32,
+  	borderRadius: 20,
+    paddingLeft:12,
+  	backgroundColor: "#ffffff",
+  	borderStyle: "solid",
+  	borderWidth: 1,
+    marginRight:16,
+    minHeight: 32,
+  	borderColor: "#c7d8de"
   },
 });
 
