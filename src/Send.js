@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
@@ -58,9 +59,9 @@ Send.defaultProps = {
 };
 
 Send.propTypes = {
-  text: React.PropTypes.string,
-  onSend: React.PropTypes.func,
-  label: React.PropTypes.string,
+  text: PropTypes.string,
+  onSend: PropTypes.func,
+  label: PropTypes.string,
   containerStyle: View.propTypes.style,
   textStyle: Text.propTypes.style,
 };
