@@ -42,7 +42,7 @@
     "react-native-communications": "2.2.1",
     "react-native-vector-icons": "^4.0.0",
     "react-native-invertible-scroll-view": "1.0.0",
-    "react-native-lightbox": "https://github.com/Kabangi/react-native-parsed-text",
+    "react-native-lightbox": "https://github.com/Kabangi/react-native-lightbox",
     "react-native-parsed-text": "https://github.com/Kabangi/react-native-parsed-text",
     "shallowequal": "0.2.2",
     "uuid": "3.0.1"
