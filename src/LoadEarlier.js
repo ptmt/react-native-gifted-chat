@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  ActivityIndicator,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ActivityIndicator, Platform, StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
 
 export default class LoadEarlier extends React.Component {
   renderLoading() {
@@ -95,8 +88,8 @@ LoadEarlier.propTypes = {
   onLoadEarlier: PropTypes.func,
   isLoadingEarlier: PropTypes.bool,
   label: PropTypes.string,
-  containerStyle: View.propTypes.style,
-  wrapperStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
+  wrapperStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
-  activityIndicatorStyle: View.propTypes.style,
+  activityIndicatorStyle: ViewPropTypes.style,
 };

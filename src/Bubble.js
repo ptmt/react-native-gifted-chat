@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Text,
-  Clipboard,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Text, Clipboard, StyleSheet, TouchableWithoutFeedback, View, ViewPropTypes } from 'react-native';
 
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
@@ -247,25 +241,25 @@ Bubble.propTypes = {
   nextMessage: PropTypes.object,
   previousMessage: PropTypes.object,
   containerStyle: PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   wrapperStyle: PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   bottomContainerStyle: PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   tickStyle: Text.propTypes.style,
   containerToNextStyle: PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   containerToPreviousStyle: PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
   //TODO: remove in next major release
   isSameDay: PropTypes.func,

@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
 
 export default class Actions extends React.Component {
   constructor(props) {
@@ -105,6 +100,6 @@ Actions.propTypes = {
   optionTintColor: PropTypes.string,
   icon: PropTypes.func,
   onPressActionButton: PropTypes.func,
-  containerStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
   iconTextStyle: Text.propTypes.style,
 };

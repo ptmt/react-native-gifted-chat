@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View, StyleSheet, ViewPropTypes } from 'react-native';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
@@ -108,7 +105,7 @@ Message.propTypes = {
   previousMessage: PropTypes.object,
   user: PropTypes.object,
   containerStyle: PropTypes.shape({
-    left: View.propTypes.style,
-    right: View.propTypes.style,
+    left: ViewPropTypes.style,
+    right: ViewPropTypes.style,
   }),
 };

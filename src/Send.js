@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
 
 export default class Send extends React.Component {
   // shouldComponentUpdate(nextProps, nextState) {
@@ -62,6 +57,6 @@ Send.propTypes = {
   text: PropTypes.string,
   onSend: PropTypes.func,
   label: PropTypes.string,
-  containerStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
 };
