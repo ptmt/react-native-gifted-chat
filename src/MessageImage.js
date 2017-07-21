@@ -6,19 +6,18 @@ import {
   View,
   Dimensions,
   ViewStylePropTypes,
-  ImageStylePropTypes
+  ImageStylePropTypes,
+  ViewPropTypes
 } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
 export default class MessageImage extends React.Component {
   render() {
-    const { width, height } = Dimensions.get('window');
-
     return (
       <View style={[styles.container, this.props.containerStyle]}>
         <Lightbox
           activeProps={{
-            style: [styles.imageActive, { width, height }]
+            style: styles.imageActive
           }}
           {...this.props.lightboxProps}
         >
@@ -43,6 +42,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover'
   },
   imageActive: {
+    flex: 1,
     resizeMode: 'contain'
   }
 });

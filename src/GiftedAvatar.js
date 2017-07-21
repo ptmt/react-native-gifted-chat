@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 /*
 **  This component will be published in a separate package
 */
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Image,

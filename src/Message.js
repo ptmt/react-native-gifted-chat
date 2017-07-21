@@ -1,22 +1,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, StyleSheet, ViewPropTypes } from 'react-native';
+import { View, ViewPropTypes, StyleSheet } from 'react-native';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
 
-import {isSameUser, isSameDay} from './utils';
+import { isSameUser, isSameDay } from './utils';
 
 export default class Message extends React.Component {
-
   getInnerComponentProps() {
-    const {containerStyle, ...props} = this.props;
+    const { containerStyle, ...props } = this.props;
     return {
       ...props,
       isSameUser,
       isSameDay
-    }
+    };
   }
 
   renderDay() {
@@ -25,7 +24,7 @@ export default class Message extends React.Component {
       if (this.props.renderDay) {
         return this.props.renderDay(dayProps);
       }
-      return <Day {...dayProps}/>;
+      return <Day {...dayProps} />;
     }
     return null;
   }
@@ -35,13 +34,13 @@ export default class Message extends React.Component {
     if (this.props.renderBubble) {
       return this.props.renderBubble(bubbleProps);
     }
-    return <Bubble {...bubbleProps}/>;
+    return <Bubble {...bubbleProps} />;
   }
 
   renderAvatar() {
     if (this.props.user._id !== this.props.currentMessage.user._id) {
       const avatarProps = this.getInnerComponentProps();
-      return <Avatar {...avatarProps}/>;
+      return <Avatar {...avatarProps} />;
     }
     return null;
   }
@@ -50,9 +49,20 @@ export default class Message extends React.Component {
     return (
       <View>
         {this.renderDay()}
-        <View style={[styles[this.props.position].container, {
-          marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
-        }, this.props.containerStyle[this.props.position]]}>
+        <View
+          style={[
+            styles[this.props.position].container,
+            {
+              marginBottom: isSameUser(
+                this.props.currentMessage,
+                this.props.nextMessage
+              )
+                ? 2
+                : 10
+            },
+            this.props.containerStyle[this.props.position]
+          ]}
+        >
           {this.props.position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
           {this.props.position === 'right' ? this.renderAvatar() : null}
@@ -69,8 +79,8 @@ const styles = {
       alignItems: 'flex-end',
       justifyContent: 'flex-start',
       marginLeft: 8,
-      marginRight: 0,
-    },
+      marginRight: 0
+    }
   }),
   right: StyleSheet.create({
     container: {
@@ -78,13 +88,13 @@ const styles = {
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
       marginLeft: 0,
-      marginRight: 8,
-    },
-  }),
+      marginRight: 8
+    }
+  })
 };
 
 Message.defaultProps = {
-  renderAvatar: null,
+  renderAvatar: undefined,
   renderBubble: null,
   renderDay: null,
   position: 'left',
@@ -92,7 +102,7 @@ Message.defaultProps = {
   nextMessage: {},
   previousMessage: {},
   user: {},
-  containerStyle: {},
+  containerStyle: {}
 };
 
 Message.propTypes = {
@@ -106,6 +116,6 @@ Message.propTypes = {
   user: PropTypes.object,
   containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
-    right: ViewPropTypes.style,
-  }),
+    right: ViewPropTypes.style
+  })
 };

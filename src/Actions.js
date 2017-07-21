@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewPropTypes
+} from 'react-native';
 
 export default class Actions extends React.Component {
   constructor(props) {
@@ -15,8 +21,7 @@ export default class Actions extends React.Component {
       options,
       cancelButtonIndex,
       tintColor: this.props.optionTintColor
-    },
-    (buttonIndex) => {
+    }, buttonIndex => {
       let i = 0;
       for (let key in this.props.options) {
         if (this.props.options.hasOwnProperty(key)) {
@@ -35,12 +40,8 @@ export default class Actions extends React.Component {
       return this.props.icon();
     }
     return (
-      <View
-        style={[styles.wrapper, this.props.wrapperStyle]}
-      >
-        <Text
-          style={[styles.iconText, this.props.iconTextStyle]}
-        >
+      <View style={[styles.wrapper, this.props.wrapperStyle]}>
+        <Text style={[styles.iconText, this.props.iconTextStyle]}>
           +
         </Text>
       </View>
@@ -64,25 +65,25 @@ const styles = StyleSheet.create({
     width: 26,
     height: 26,
     marginLeft: 10,
-    marginBottom: 10,
+    marginBottom: 10
   },
   wrapper: {
     borderRadius: 13,
     borderColor: '#b2b2b2',
     borderWidth: 2,
-    flex: 1,
+    flex: 1
   },
   iconText: {
     color: '#b2b2b2',
     fontWeight: 'bold',
     fontSize: 16,
     backgroundColor: 'transparent',
-    textAlign: 'center',
-  },
+    textAlign: 'center'
+  }
 });
 
 Actions.contextTypes = {
-  actionSheet: PropTypes.func,
+  actionSheet: PropTypes.func
 };
 
 Actions.defaultProps = {
@@ -91,7 +92,7 @@ Actions.defaultProps = {
   optionTintColor: '#007AFF',
   icon: null,
   containerStyle: {},
-  iconTextStyle: {},
+  iconTextStyle: {}
 };
 
 Actions.propTypes = {
@@ -101,5 +102,5 @@ Actions.propTypes = {
   icon: PropTypes.func,
   onPressActionButton: PropTypes.func,
   containerStyle: ViewPropTypes.style,
-  iconTextStyle: Text.propTypes.style,
+  iconTextStyle: Text.propTypes.style
 };

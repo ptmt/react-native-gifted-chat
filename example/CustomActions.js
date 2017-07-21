@@ -1,6 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+<<<<<<< HEAD
 import { Modal, StyleSheet, TouchableOpacity, View, Text, ViewPropTypes } from 'react-native';
+=======
+import {
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ViewPropTypes,
+  Text,
+} from 'react-native';
+>>>>>>> FaridSafi/master
 
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';

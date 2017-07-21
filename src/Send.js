@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewPropTypes
+} from 'react-native';
 
 export default class Send extends React.Component {
   // shouldComponentUpdate(nextProps, nextState) {
@@ -16,23 +21,28 @@ export default class Send extends React.Component {
         <TouchableOpacity
           style={[styles.container, this.props.containerStyle]}
           onPress={() => {
-            this.props.onSend({text: this.props.text.trim()}, true);
+            this.props.onSend({ text: this.props.text.trim() }, true);
           }}
           accessibilityTraits="button"
         >
-          <Icon name="send" size={30} style={{paddingRight:16}} color="#99c000" />
+          <Icon
+            name="send"
+            size={30}
+            style={{ paddingRight: 16 }}
+            color="#99c000"
+          />
         </TouchableOpacity>
       );
     }
-    return <View/>;
+    return <View />;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     height: 44,
-    marginBottom:12,
-    justifyContent: 'flex-end',
+    marginBottom: 12,
+    justifyContent: 'flex-end'
   },
   text: {
     color: '#0084ff',
@@ -41,8 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginBottom: 12,
     marginLeft: 10,
-    marginRight: 10,
-  },
+    marginRight: 10
+  }
 });
 
 Send.defaultProps = {
@@ -50,7 +60,7 @@ Send.defaultProps = {
   onSend: () => {},
   label: 'Send',
   containerStyle: {},
-  textStyle: {},
+  textStyle: {}
 };
 
 Send.propTypes = {
@@ -58,5 +68,5 @@ Send.propTypes = {
   onSend: PropTypes.func,
   label: PropTypes.string,
   containerStyle: ViewPropTypes.style,
-  textStyle: Text.propTypes.style,
+  textStyle: Text.propTypes.style
 };
