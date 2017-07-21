@@ -1,15 +1,9 @@
-import PropTypes from 'prop-types';
 /*
 **  This component will be published in a separate package
 */
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 // TODO
 // 3 words name initials
@@ -28,7 +22,7 @@ export default class GiftedAvatar extends React.Component {
     }
 
     let sumChars = 0;
-    for(let i = 0; i < userName.length; i++) {
+    for (let i = 0; i < userName.length; i++) {
       sumChars += userName.charCodeAt(i);
     }
 
@@ -55,7 +49,7 @@ export default class GiftedAvatar extends React.Component {
     } else if (typeof this.props.user.avatar === 'string') {
       return (
         <Image
-          source={{uri: this.props.user.avatar}}
+          source={{ uri: this.props.user.avatar }}
           style={[defaultStyles.avatarStyle, this.props.avatarStyle]}
         />
       );
@@ -85,19 +79,19 @@ export default class GiftedAvatar extends React.Component {
         <View
           style={[
             defaultStyles.avatarStyle,
-            {backgroundColor: 'transparent'},
-            this.props.avatarStyle,
+            { backgroundColor: 'transparent' },
+            this.props.avatarStyle
           ]}
           accessibilityTraits="image"
         />
-      )
+      );
     }
     if (this.props.user.avatar) {
       return (
         <TouchableOpacity
           disabled={this.props.onPress ? false : true}
           onPress={() => {
-            const {onPress, ...other} = this.props;
+            const { onPress, ...other } = this.props;
             this.props.onPress && this.props.onPress(other);
           }}
           accessibilityTraits="image"
@@ -115,13 +109,13 @@ export default class GiftedAvatar extends React.Component {
       <TouchableOpacity
         disabled={this.props.onPress ? false : true}
         onPress={() => {
-          const {onPress, ...other} = this.props;
+          const { onPress, ...other } = this.props;
           this.props.onPress && this.props.onPress(other);
         }}
         style={[
           defaultStyles.avatarStyle,
-          {backgroundColor: this.avatarColor},
-          this.props.avatarStyle,
+          { backgroundColor: this.avatarColor },
+          this.props.avatarStyle
         ]}
         accessibilityTraits="image"
       >
@@ -137,29 +131,29 @@ const defaultStyles = {
     alignItems: 'center',
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: 20
   },
   textStyle: {
     color: '#fff',
     fontSize: 16,
     backgroundColor: 'transparent',
-    fontWeight: '100',
-  },
+    fontWeight: '100'
+  }
 };
 
 GiftedAvatar.defaultProps = {
   user: {
     name: null,
-    avatar: null,
+    avatar: null
   },
   onPress: null,
   avatarStyle: {},
-  textStyle: {},
+  textStyle: {}
 };
 
 GiftedAvatar.propTypes = {
   user: PropTypes.object,
   onPress: PropTypes.func,
   avatarStyle: Image.propTypes.style,
-  textStyle: Text.propTypes.style,
+  textStyle: Text.propTypes.style
 };
