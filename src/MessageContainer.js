@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { ListView, FlatList, View } from 'react-native';
+import { ListView, View } from 'react-native';
 
 import shallowequal from 'shallowequal';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
@@ -155,23 +155,6 @@ export default class MessageContainer extends React.Component {
           renderHeader={this.renderFooter}
           renderFooter={this.renderLoadEarlier}
           renderScrollComponent={this.renderScrollComponent}
-        />
-        <FlatList
-          {...props}
-          style={[
-            style,
-            { transform: [{ scaleY: -1 }, { perspective: 1280 }] }
-          ]}
-          renderItem={x => {
-            let itemRef;
-            return (
-              <View
-                style={{ transform: [{ scaleY: -1 }, { perspective: 1280 }] }}
-              >
-                {renderItem(x)}
-              </View>
-            );
-          }}
         />
       </View>
     );
