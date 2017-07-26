@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-<<<<<<< HEAD
-import { Modal, StyleSheet, TouchableOpacity, View, Text, ViewPropTypes } from 'react-native';
-=======
+
 import {
   Modal,
   StyleSheet,
@@ -11,7 +9,6 @@ import {
   ViewPropTypes,
   Text,
 } from 'react-native';
->>>>>>> FaridSafi/master
 
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import NavBar, { NavButton, NavButtonText, NavTitle } from 'react-native-nav';
@@ -36,7 +33,7 @@ export default class CustomActions extends React.Component {
   }
 
   setModalVisible(visible = false) {
-    this.setState({modalVisible: visible});
+    this.setState({ modalVisible: visible });
   }
 
   onActionsPress() {
@@ -45,15 +42,14 @@ export default class CustomActions extends React.Component {
     this.context.actionSheet().showActionSheetWithOptions({
       options,
       cancelButtonIndex,
-    },
-    (buttonIndex) => {
+    }, buttonIndex => {
       switch (buttonIndex) {
         case 0:
           this.setModalVisible(true);
           break;
         case 1:
           navigator.geolocation.getCurrentPosition(
-            (position) => {
+            position => {
               this.props.onSend({
                 location: {
                   latitude: position.coords.latitude,
@@ -61,8 +57,8 @@ export default class CustomActions extends React.Component {
                 },
               });
             },
-            (error) => alert(error.message),
-            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+            error => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
           );
           break;
         default:
@@ -76,42 +72,48 @@ export default class CustomActions extends React.Component {
 
   renderNavBar() {
     return (
-      <NavBar style={{
-        statusBar: {
-          backgroundColor: '#FFF',
-        },
-        navBar: {
-          backgroundColor: '#FFF',
-        },
-      }}>
-        <NavButton onPress={() => {
-          this.setModalVisible(false);
+      <NavBar
+        style={{
+          statusBar: {
+            backgroundColor: '#FFF',
+          },
+          navBar: {
+            backgroundColor: '#FFF',
+          },
         }}>
-          <NavButtonText style={{
-            color: '#000',
+        <NavButton
+          onPress={() => {
+            this.setModalVisible(false);
           }}>
+          <NavButtonText
+            style={{
+              color: '#000',
+            }}>
             {'Cancel'}
           </NavButtonText>
         </NavButton>
-        <NavTitle style={{
-          color: '#000',
-        }}>
-          {'Camera Roll'}
-        </NavTitle>
-        <NavButton onPress={() => {
-          this.setModalVisible(false);
-
-          const images = this.getImages().map((image) => {
-            return {
-              image: image.uri,
-            };
-          });
-          this.props.onSend(images);
-          this.setImages([]);
-        }}>
-          <NavButtonText style={{
+        <NavTitle
+          style={{
             color: '#000',
           }}>
+          {'Camera Roll'}
+        </NavTitle>
+        <NavButton
+          onPress={() => {
+            this.setModalVisible(false);
+
+            const images = this.getImages().map(image => {
+              return {
+                image: image.uri,
+              };
+            });
+            this.props.onSend(images);
+            this.setImages([]);
+          }}>
+          <NavButtonText
+            style={{
+              color: '#000',
+            }}>
             {'Send'}
           </NavButtonText>
         </NavButton>
@@ -124,12 +126,8 @@ export default class CustomActions extends React.Component {
       return this.props.icon();
     }
     return (
-      <View
-        style={[styles.wrapper, this.props.wrapperStyle]}
-      >
-        <Text
-          style={[styles.iconText, this.props.iconTextStyle]}
-        >
+      <View style={[styles.wrapper, this.props.wrapperStyle]}>
+        <Text style={[styles.iconText, this.props.iconTextStyle]}>
           +
         </Text>
       </View>
@@ -140,16 +138,14 @@ export default class CustomActions extends React.Component {
     return (
       <TouchableOpacity
         style={[styles.container, this.props.containerStyle]}
-        onPress={this.onActionsPress}
-      >
+        onPress={this.onActionsPress}>
         <Modal
           animationType={'slide'}
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => {
             this.setModalVisible(false);
-          }}
-        >
+          }}>
           {this.renderNavBar()}
           <CameraRollPicker
             maximum={10}
