@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import {GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 
@@ -35,7 +30,11 @@ export default class Example extends React.Component {
     this._isMounted = true;
     this.setState(() => {
       return {
-        messages: require('./data/messages.js'),
+        messages: Array(5000)
+          .fill(0)
+          .reduce((acc, i) => acc.concat(require('./data/messages.js')), [])
+          .map(a => ({ ...a, _id: Math.round(Math.random() * 1000000) })),
+        // messages: Array(10).join(),
       };
     });
   }
@@ -45,7 +44,7 @@ export default class Example extends React.Component {
   }
 
   onLoadEarlier() {
-    this.setState((previousState) => {
+    this.setState(previousState => {
       return {
         isLoadingEarlier: true,
       };
@@ -53,9 +52,12 @@ export default class Example extends React.Component {
 
     setTimeout(() => {
       if (this._isMounted === true) {
-        this.setState((previousState) => {
+        this.setState(previousState => {
           return {
-            messages: GiftedChat.prepend(previousState.messages, require('./data/old_messages.js')),
+            messages: GiftedChat.prepend(
+              previousState.messages,
+              require('./data/old_messages.js')
+            ),
             loadEarlier: false,
             isLoadingEarlier: false,
           };
@@ -65,7 +67,7 @@ export default class Example extends React.Component {
   }
 
   onSend(messages = []) {
-    this.setState((previousState) => {
+    this.setState(previousState => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
       };
@@ -77,10 +79,10 @@ export default class Example extends React.Component {
 
   answerDemo(messages) {
     if (messages.length > 0) {
-      if ((messages[0].image || messages[0].location) || !this._isAlright) {
-        this.setState((previousState) => {
+      if (messages[0].image || messages[0].location || !this._isAlright) {
+        this.setState(previousState => {
           return {
-            typingText: 'React Native is typing'
+            typingText: 'React Native is typing',
           };
         });
       }
@@ -102,7 +104,7 @@ export default class Example extends React.Component {
         }
       }
 
-      this.setState((previousState) => {
+      this.setState(previousState => {
         return {
           typingText: null,
         };
@@ -111,7 +113,7 @@ export default class Example extends React.Component {
   }
 
   onReceive(text) {
-    this.setState((previousState) => {
+    this.setState(previousState => {
       return {
         messages: GiftedChat.append(previousState.messages, {
           _id: Math.round(Math.random() * 1000000),
@@ -129,27 +131,18 @@ export default class Example extends React.Component {
 
   renderCustomActions(props) {
     if (Platform.OS === 'ios') {
-      return (
-        <CustomActions
-          {...props}
-        />
-      );
+      return <CustomActions {...props} />;
     }
     const options = {
-      'Action 1': (props) => {
+      'Action 1': props => {
         alert('option 1');
       },
-      'Action 2': (props) => {
+      'Action 2': props => {
         alert('option 2');
       },
-      'Cancel': () => {},
+      Cancel: () => {},
     };
-    return (
-      <Actions
-        {...props}
-        options={options}
-      />
-    );
+    return <Actions {...props} options={options} />;
   }
 
   renderBubble(props) {
@@ -159,18 +152,14 @@ export default class Example extends React.Component {
         wrapperStyle={{
           left: {
             backgroundColor: '#f0f0f0',
-          }
+          },
         }}
       />
     );
   }
 
   renderCustomView(props) {
-    return (
-      <CustomView
-        {...props}
-      />
-    );
+    return <CustomView {...props} />;
   }
 
   renderFooter(props) {
@@ -189,16 +178,15 @@ export default class Example extends React.Component {
   render() {
     return (
       <GiftedChat
+        animated={true}
         messages={this.state.messages}
         onSend={this.onSend}
         loadEarlier={this.state.loadEarlier}
         onLoadEarlier={this.onLoadEarlier}
         isLoadingEarlier={this.state.isLoadingEarlier}
-
         user={{
           _id: 1, // sent messages should have same user._id
         }}
-
         renderActions={this.renderCustomActions}
         renderBubble={this.renderBubble}
         renderCustomView={this.renderCustomView}
