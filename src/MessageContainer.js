@@ -17,6 +17,21 @@ export default class MessageContainer extends React.Component {
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
   }
 
+  prepareMessages(messages) {
+    return messages.map((m, i) => {
+      const previousMessage = messages[i + 1] || {};
+      const nextMessage = messages[i - 1] || {};
+      // add next and previous messages to hash to ensure updates
+      const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
+      return {
+        ...m,
+        previousMessage,
+        nextMessage,
+        hash: md5(toHash),
+      };
+    });
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.messages.length !== nextProps.messages.length) {
       return true;
@@ -51,8 +66,9 @@ export default class MessageContainer extends React.Component {
   }
 
   scrollTo(options) {
-    // this._invertibleScrollViewRef.scrollTo(options);
-    this.flatListRef.scrollToIndex;
+    if (this.flatListRef) {
+      this.flatListRef.scrollToOffset({ ...options, offset: options.y });
+    }
   }
 
   renderRow({ item, sectionId, rowId }) {
@@ -100,7 +116,7 @@ export default class MessageContainer extends React.Component {
           initialListSize={20}
           pageSize={20}
           {...this.props.listViewProps}
-          data={this.props.messages}
+          data={this.prepareMessages(this.props.messages)}
           keyExtractor={(item, index) => item._id}
           inverted={true}
           style={[
