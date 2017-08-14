@@ -14,7 +14,7 @@ export default class Message extends React.Component {
     return {
       ...props,
       isSameUser,
-      isSameDay
+      isSameDay,
     };
   }
 
@@ -45,6 +45,10 @@ export default class Message extends React.Component {
     return null;
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.currentMessage.hash !== nextProps.currentMessage.hash;
+  }
+
   render() {
     return (
       <View>
@@ -58,9 +62,9 @@ export default class Message extends React.Component {
                 this.props.nextMessage
               )
                 ? 2
-                : 10
+                : 10,
             },
-            this.props.containerStyle[this.props.position]
+            this.props.containerStyle[this.props.position],
           ]}
         >
           {this.props.position === 'left' ? this.renderAvatar() : null}
@@ -79,8 +83,8 @@ const styles = {
       alignItems: 'flex-end',
       justifyContent: 'flex-start',
       marginLeft: 8,
-      marginRight: 0
-    }
+      marginRight: 0,
+    },
   }),
   right: StyleSheet.create({
     container: {
@@ -88,9 +92,9 @@ const styles = {
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
       marginLeft: 0,
-      marginRight: 8
-    }
-  })
+      marginRight: 8,
+    },
+  }),
 };
 
 Message.defaultProps = {
@@ -102,7 +106,7 @@ Message.defaultProps = {
   nextMessage: {},
   previousMessage: {},
   user: {},
-  containerStyle: {}
+  containerStyle: {},
 };
 
 Message.propTypes = {
@@ -116,6 +120,6 @@ Message.propTypes = {
   user: PropTypes.object,
   containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
-    right: ViewPropTypes.style
-  })
+    right: ViewPropTypes.style,
+  }),
 };
