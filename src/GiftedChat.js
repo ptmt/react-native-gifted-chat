@@ -351,7 +351,10 @@ class GiftedChat extends React.Component {
   }
 
   onInputSizeChanged(size) {
-    const newComposerHeight = Math.max(MIN_COMPOSER_HEIGHT, Math.min(MAX_COMPOSER_HEIGHT, size.height));
+    const newComposerHeight = Math.max(
+      MIN_COMPOSER_HEIGHT,
+      Math.min(this.props.maxComposerHeight || MAX_COMPOSER_HEIGHT, size.height)
+    );
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight);
     this.setState({
       composerHeight: newComposerHeight,
@@ -543,6 +546,7 @@ GiftedChat.propTypes = {
   user: PropTypes.object,
   bottomOffset: PropTypes.number,
   minInputToolbarHeight: PropTypes.number,
+  maxComposerHeight: PropTypes.number,
   isLoadingEarlier: PropTypes.bool,
   messageIdGenerator: PropTypes.func,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
