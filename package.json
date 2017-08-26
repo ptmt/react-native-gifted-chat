@@ -1,10 +1,6 @@
 {
   "name": "react-native-gifted-chat-flat",
-<<<<<<< HEAD
-  "version": "0.3.1",
-=======
   "version": "0.4.0",
->>>>>>> Rewrite layout and message preparation
   "description": "The most complete chat UI for React Native",
   "main": "index.js",
   "repository": {
