@@ -17,20 +17,23 @@ export default class MessageContainer extends React.Component {
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
   }
 
-  prepareMessages(messages) {
-    return messages.map((m, i) => {
-      const previousMessage = messages[i + 1] || {};
-      const nextMessage = messages[i - 1] || {};
-      // add next and previous messages to hash to ensure updates
-      const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
-      return {
-        ...m,
-        previousMessage,
-        nextMessage,
-        hash: md5(toHash),
-      };
-    });
-  }
+  // prepareMessages(messages) {
+  //   const d = new Date();
+  //   const toRender = messages.map((m, i) => {
+  //     const previousMessage = messages[i + 1] || {};
+  //     const nextMessage = messages[i - 1] || {};
+  //     // add next and previous messages to hash to ensure updates
+  //     const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
+  //     return {
+  //       ...m,
+  //       previousMessage,
+  //       nextMessage,
+  //       hash: md5(toHash),
+  //     };
+  //   });
+  //   console.log(new Date() - d, 'ms spent on preparing');
+  //   return toRender;
+  // }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.messages.length !== nextProps.messages.length) {
@@ -86,12 +89,17 @@ export default class MessageContainer extends React.Component {
       item.user = {};
     }
 
+    const { messages, ...restProps } = this.props;
+    const previousMessage = messages[rowId - 1] || {};
+    const nextMessage = messages[rowId + 1] || {};
+
     const messageProps = {
-      ...this.props,
+      ...restProps,
       key: item._id,
       currentMessage: item,
-      previousMessage: item.previousMessage,
-      nextMessage: item.nextMessage,
+      previousMessage,
+      nextMessage,
+      hash: JSON.stringify(item) + previousMessage._id + nextMessage._id,
       position: item.user._id === this.props.user._id ? 'right' : 'left',
     };
 
@@ -106,28 +114,39 @@ export default class MessageContainer extends React.Component {
   }
 
   render() {
-    return (
-      <View ref="container" style={{ flex: 1 }}>
-        <FlatList
-          ref={ref => (this.flatListRef = ref)}
-          enableEmptySections={true}
-          removeClippedSubviews={true}
-          automaticallyAdjustContentInsets={false}
-          initialListSize={20}
-          pageSize={20}
-          {...this.props.listViewProps}
-          data={this.prepareMessages(this.props.messages)}
-          keyExtractor={(item, index) => item._id}
-          inverted={true}
-          style={[
-            this.props.style,
-            { transform: [{ scaleY: -1 }, { perspective: 1280 }] },
-          ]}
-          renderItem={this.renderRow}
-          renderHeader={this.renderFooter}
-          renderFooter={this.renderLoadEarlier}
+    if (this.props.messages.length === 0) {
+      return (
+        <View
+          style={{
+            flex: 1,
+          }}
         />
-      </View>
+      );
+    }
+    return (
+      <FlatList
+        ref={ref => (this.flatListRef = ref)}
+        enableEmptySections={true}
+        removeClippedSubviews={true}
+        automaticallyAdjustContentInsets={false}
+        initialListSize={10}
+        pageSize={5}
+        {...this.props.listViewProps}
+        data={this.props.messages}
+        keyExtractor={(item, index) => item._id}
+        inverted={true}
+        style={[
+          this.props.style,
+          {
+            flex: 1,
+            height: 100,
+            transform: [{ scaleY: -1 }, { perspective: 1280 }],
+          },
+        ]}
+        renderItem={this.renderRow}
+        renderHeader={this.renderFooter}
+        renderFooter={this.renderLoadEarlier}
+      />
     );
   }
 }

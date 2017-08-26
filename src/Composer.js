@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import { Platform, StyleSheet, TextInput } from 'react-native';
 
 export default class Composer extends React.Component {
   onChange(e) {
@@ -12,7 +8,10 @@ export default class Composer extends React.Component {
     if (!this.contentSize) {
       this.contentSize = contentSize;
       this.props.onInputSizeChanged(this.contentSize);
-    } else if (this.contentSize.width !== contentSize.width || this.contentSize.height !== contentSize.height) {
+    } else if (
+      this.contentSize.width !== contentSize.width ||
+      this.contentSize.height !== contentSize.height
+    ) {
       this.contentSize = contentSize;
       this.props.onInputSizeChanged(this.contentSize);
     }
@@ -28,12 +27,13 @@ export default class Composer extends React.Component {
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={this.props.multiline}
-
-        onContentSizeChange={(e) => this.onChange(e)}
+        onContentSizeChange={e => this.onChange(e)}
         onChangeText={text => this.onChangeText(text)}
-
-        style={[styles.textInput, this.props.textInputStyle, {height: this.props.composerHeight}]}
-
+        style={[
+          styles.textInput,
+          this.props.textInputStyle,
+          { height: this.props.composerHeight },
+        ]}
         value={this.props.text}
         accessibilityLabel={this.props.text || this.props.placeholder}
         enablesReturnKeyAutomatically={true}
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     fontSize: 14,
-    color:'#13222a',
+    color: '#13222a',
     lineHeight: 16,
     marginTop: Platform.select({
       ios: 6,
@@ -60,20 +60,19 @@ const styles = StyleSheet.create({
       android: 8,
     }),
     height: 32,
-  	borderRadius: 20,
-    paddingLeft:12,
-  	backgroundColor: "#ffffff",
-  	borderStyle: "solid",
-  	borderWidth: 1,
-    marginRight:16,
+    borderRadius: 20,
+    paddingLeft: 12,
+    backgroundColor: 'white',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    marginRight: 16,
     minHeight: 32,
-  	borderColor: "#c7d8de"
+    borderColor: '#c7d8de',
   },
 });
 
 Composer.defaultProps = {
-  onChange: () => {
-  },
+  onChange: () => {},
   composerHeight: Platform.select({
     ios: 33,
     android: 32,
@@ -84,10 +83,8 @@ Composer.defaultProps = {
   textInputProps: null,
   multiline: true,
   textInputStyle: {},
-  onTextChanged: () => {
-  },
-  onInputSizeChanged: () => {
-  },
+  onTextChanged: () => {},
+  onInputSizeChanged: () => {},
 };
 
 Composer.propTypes = {

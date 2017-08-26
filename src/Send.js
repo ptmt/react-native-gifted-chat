@@ -7,7 +7,6 @@ import {
   View,
   ViewPropTypes,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class Send extends React.Component {
   // shouldComponentUpdate(nextProps, nextState) {
@@ -24,13 +23,9 @@ export default class Send extends React.Component {
           onPress={() => {
             this.props.onSend({ text: this.props.text.trim() }, true);
           }}
-          accessibilityTraits="button">
-          <Icon
-            name="send"
-            size={30}
-            style={{ paddingRight: 16 }}
-            color="#99c000"
-          />
+          accessibilityTraits="button"
+        >
+          <Text>Send</Text>
         </TouchableOpacity>
       );
     }
