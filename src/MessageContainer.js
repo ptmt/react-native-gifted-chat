@@ -17,24 +17,6 @@ export default class MessageContainer extends React.Component {
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
   }
 
-  // prepareMessages(messages) {
-  //   const d = new Date();
-  //   const toRender = messages.map((m, i) => {
-  //     const previousMessage = messages[i + 1] || {};
-  //     const nextMessage = messages[i - 1] || {};
-  //     // add next and previous messages to hash to ensure updates
-  //     const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
-  //     return {
-  //       ...m,
-  //       previousMessage,
-  //       nextMessage,
-  //       hash: md5(toHash),
-  //     };
-  //   });
-  //   console.log(new Date() - d, 'ms spent on preparing');
-  //   return toRender;
-  // }
-
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.messages.length !== nextProps.messages.length) {
       return true;
@@ -74,7 +56,7 @@ export default class MessageContainer extends React.Component {
     }
   }
 
-  renderRow({ item, sectionId, rowId }) {
+  renderRow({ item, index }) {
     if (!item._id && item._id !== 0) {
       console.warn(
         'GiftedChat: `_id` is missing for message',
@@ -90,8 +72,8 @@ export default class MessageContainer extends React.Component {
     }
 
     const { messages, ...restProps } = this.props;
-    const previousMessage = messages[rowId - 1] || {};
-    const nextMessage = messages[rowId + 1] || {};
+    const previousMessage = messages[index + 1] || {};
+    const nextMessage = messages[index - 1] || {};
 
     const messageProps = {
       ...restProps,
