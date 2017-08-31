@@ -8,6 +8,11 @@ import md5 from 'md5';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
+const transform =
+  Platform.OS === 'android'
+    ? [{ scaleY: -1 }, { perspective: 1280 }]
+    : [{ scaleY: -1 }];
+
 export default class MessageContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -89,7 +94,7 @@ export default class MessageContainer extends React.Component {
       return this.props.renderMessage(messageProps);
     }
     return (
-      <View style={{ transform: [{ scaleY: -1 }, { perspective: 1280 }] }}>
+      <View style={{ transform }}>
         <Message {...messageProps} />
       </View>
     );
@@ -122,10 +127,7 @@ export default class MessageContainer extends React.Component {
           {
             flex: 1,
             height: 100,
-            transform: [
-              { scaleY: -1 },
-              Platform.OS === 'android' ? { perspective: 1280 } : {},
-            ],
+            transform,
           },
         ]}
         renderItem={this.renderRow}
