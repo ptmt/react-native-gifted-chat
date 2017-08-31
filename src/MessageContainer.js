@@ -122,7 +122,10 @@ export default class MessageContainer extends React.Component {
           {
             flex: 1,
             height: 100,
-            transform: [{ scaleY: -1 }, { perspective: 1280 }],
+            transform: [
+              { scaleY: -1 },
+              Platform.OS === 'android' ? { perspective: 1280 } : {},
+            ],
           },
         ]}
         renderItem={this.renderRow}
