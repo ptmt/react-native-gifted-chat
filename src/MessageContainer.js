@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Platform } from 'react-native';
 
 import shallowequal from 'shallowequal';
 import md5 from 'md5';
