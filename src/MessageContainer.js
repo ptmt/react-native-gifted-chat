@@ -116,8 +116,8 @@ export default class MessageContainer extends React.Component {
         enableEmptySections={true}
         removeClippedSubviews={true}
         automaticallyAdjustContentInsets={false}
-        initialListSize={10}
-        pageSize={5}
+        initialListSize={5}
+        pageSize={1}
         {...this.props.listViewProps}
         data={this.props.messages}
         keyExtractor={(item, index) => item._id}
