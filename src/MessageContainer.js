@@ -86,7 +86,7 @@ export default class MessageContainer extends React.Component {
       currentMessage: item,
       previousMessage,
       nextMessage,
-      hash: JSON.stringify(item) + previousMessage._id + nextMessage._id,
+      hash: md5(JSON.stringify(item) + previousMessage._id + nextMessage._id),
       position: item.user._id === this.props.user._id ? 'right' : 'left',
     };
 

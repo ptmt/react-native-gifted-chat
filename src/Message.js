@@ -46,7 +46,7 @@ export default class Message extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.currentMessage.hash !== nextProps.currentMessage.hash;
+    return this.props.hash !== nextProps.hash;
   }
 
   render() {
