@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewPropTypes
+  ViewPropTypes,
+  TouchableOpacity,
 } from 'react-native';
 
 import MessageText from './MessageText';
@@ -28,7 +29,7 @@ export default class Bubble extends React.Component {
     ) {
       return StyleSheet.flatten([
         styles[this.props.position].containerToNext,
-        this.props.containerToNextStyle[this.props.position]
+        this.props.containerToNextStyle[this.props.position],
       ]);
     }
     return null;
@@ -41,7 +42,7 @@ export default class Bubble extends React.Component {
     ) {
       return StyleSheet.flatten([
         styles[this.props.position].containerToPrevious,
-        this.props.containerToPreviousStyle[this.props.position]
+        this.props.containerToPreviousStyle[this.props.position],
       ]);
     }
     return null;
@@ -80,10 +81,12 @@ export default class Bubble extends React.Component {
     if (currentMessage.sent || currentMessage.received) {
       return (
         <View style={styles.tickView}>
-          {currentMessage.sent &&
-            <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
-          {currentMessage.received &&
-            <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
+          {currentMessage.sent && (
+            <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>
+          )}
+          {currentMessage.received && (
+            <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>
+          )}
         </View>
       );
     }
@@ -116,7 +119,7 @@ export default class Bubble extends React.Component {
         const cancelButtonIndex = options.length - 1;
         this.context.actionSheet().showActionSheetWithOptions({
           options,
-          cancelButtonIndex
+          cancelButtonIndex,
         }, buttonIndex => {
           switch (buttonIndex) {
             case 0:
@@ -133,7 +136,7 @@ export default class Bubble extends React.Component {
       <View
         style={[
           styles[this.props.position].container,
-          this.props.containerStyle[this.props.position]
+          this.props.containerStyle[this.props.position],
         ]}
       >
         <View
@@ -141,10 +144,11 @@ export default class Bubble extends React.Component {
             styles[this.props.position].wrapper,
             this.props.wrapperStyle[this.props.position],
             this.handleBubbleToNext(),
-            this.handleBubbleToPrevious()
+            this.handleBubbleToPrevious(),
           ]}
         >
-          <TouchableWithoutFeedback
+          <TouchableOpacity
+            activeOpacity={0.75}
             onLongPress={this.onLongPress}
             accessibilityTraits="text"
             {...this.props.touchableProps}
@@ -154,12 +158,12 @@ export default class Bubble extends React.Component {
               {this.renderMessageImage()}
               {this.renderMessageText()}
             </View>
-          </TouchableWithoutFeedback>
+          </TouchableOpacity>
         </View>
         <View
           style={[
             styles.bottom,
-            this.props.bottomContainerStyle[this.props.position]
+            this.props.bottomContainerStyle[this.props.position],
           ]}
         >
           {this.renderTicks()}
@@ -174,7 +178,7 @@ const styles = {
   left: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-start'
+      alignItems: 'flex-start',
     },
     wrapper: {
       backgroundColor: '#ececec',
@@ -186,15 +190,15 @@ const styles = {
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
       borderBottomRightRadius: 32,
-      borderBottomLeftRadius: 0
+      borderBottomLeftRadius: 0,
     },
     containerToNext: {},
-    containerToPrevious: {}
+    containerToPrevious: {},
   }),
   right: StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'flex-end'
+      alignItems: 'flex-end',
     },
     wrapper: {
       borderTopLeftRadius: 32,
@@ -206,31 +210,31 @@ const styles = {
       marginLeft: 60,
       minHeight: 20,
       minWidth: 100,
-      justifyContent: 'flex-end'
+      justifyContent: 'flex-end',
     },
     containerToNext: {},
-    containerToPrevious: {}
+    containerToPrevious: {},
   }),
   bottom: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginTop: 4,
-    marginBottom: 4
+    marginBottom: 4,
   },
   tick: {
     fontSize: 10,
     backgroundColor: 'transparent',
-    color: '#1ab7f3'
+    color: '#1ab7f3',
   },
   tickView: {
     flexDirection: 'row',
     marginRight: 10,
-    marginTop: 8
-  }
+    marginTop: 8,
+  },
 };
 
 Bubble.contextTypes = {
-  actionSheet: PropTypes.func
+  actionSheet: PropTypes.func,
 };
 
 Bubble.defaultProps = {
@@ -244,7 +248,7 @@ Bubble.defaultProps = {
   currentMessage: {
     text: null,
     createdAt: null,
-    image: null
+    image: null,
   },
   nextMessage: {},
   previousMessage: {},
@@ -256,7 +260,7 @@ Bubble.defaultProps = {
   containerToPreviousStyle: {},
   //TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
-  isSameUser: warnDeprecated(isSameUser)
+  isSameUser: warnDeprecated(isSameUser),
 };
 
 Bubble.propTypes = {
@@ -272,26 +276,26 @@ Bubble.propTypes = {
   previousMessage: PropTypes.object,
   containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
-    right: ViewPropTypes.style
+    right: ViewPropTypes.style,
   }),
   wrapperStyle: PropTypes.shape({
     left: ViewPropTypes.style,
-    right: ViewPropTypes.style
+    right: ViewPropTypes.style,
   }),
   bottomContainerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
-    right: ViewPropTypes.style
+    right: ViewPropTypes.style,
   }),
   tickStyle: Text.propTypes.style,
   containerToNextStyle: PropTypes.shape({
     left: ViewPropTypes.style,
-    right: ViewPropTypes.style
+    right: ViewPropTypes.style,
   }),
   containerToPreviousStyle: PropTypes.shape({
     left: ViewPropTypes.style,
-    right: ViewPropTypes.style
+    right: ViewPropTypes.style,
   }),
   //TODO: remove in next major release
   isSameDay: PropTypes.func,
-  isSameUser: PropTypes.func
+  isSameUser: PropTypes.func,
 };
