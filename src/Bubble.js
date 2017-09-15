@@ -7,7 +7,6 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewPropTypes,
-  TouchableOpacity,
 } from 'react-native';
 
 import MessageText from './MessageText';
@@ -147,8 +146,7 @@ export default class Bubble extends React.Component {
             this.handleBubbleToPrevious(),
           ]}
         >
-          <TouchableOpacity
-            activeOpacity={0.75}
+          <TouchableWithoutFeedback
             onLongPress={this.onLongPress}
             accessibilityTraits="text"
             {...this.props.touchableProps}
@@ -158,7 +156,7 @@ export default class Bubble extends React.Component {
               {this.renderMessageImage()}
               {this.renderMessageText()}
             </View>
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
         </View>
         <View
           style={[
