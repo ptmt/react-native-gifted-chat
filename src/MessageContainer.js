@@ -100,6 +100,10 @@ export default class MessageContainer extends React.Component {
     );
   }
 
+  renderHeaderWrapper = () => {
+    return <View style={{ flex: 1 }}>{this.renderLoadEarlier()}</View>;
+  };
+
   render() {
     if (this.props.messages.length === 0) {
       return (
@@ -126,18 +130,18 @@ export default class MessageContainer extends React.Component {
           this.props.style,
           {
             flex: 1,
-            height: 100,
+            marginTop: Platform.OS == 'ios' ? 64 : 80,
             transform,
           },
         ]}
         contentContainerStyle={{
           justifyContent: 'flex-end',
-          flex: 1,
-          paddingBottom: 70,
+          minHeight: '80%',
         }}
         renderItem={this.renderRow}
         renderHeader={this.renderFooter}
         renderFooter={this.renderLoadEarlier}
+        ListHeaderComponent={this.renderHeaderWrapper}
       />
     );
   }
