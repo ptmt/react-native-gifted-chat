@@ -312,6 +312,7 @@ class GiftedChat extends React.Component {
     return (
       <MessageContainer
         {...this.props}
+        style={this.props.messageContainerStyle}
         invertibleScrollViewProps={this.invertibleScrollViewProps}
         messages={this.getMessages()}
         ref={component => (this._messageContainerRef = component)}
@@ -430,7 +431,7 @@ class GiftedChat extends React.Component {
         <WrapperView
           style={styles.container}
           behavior={Platform.OS === 'android' ? 'height' : 'padding'}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 62 : 80}
+          keyboardVerticalOffset={this.props.keyboardVerticalOffset}
           style={Platform.OS === 'ios' ? StyleSheet.absoluteFill : { flex: 1 }}
         >
           {this.renderMessages()}
@@ -492,6 +493,7 @@ GiftedChat.defaultProps = {
   isLoadingEarlier: false,
   messageIdGenerator: () => uuid.v4(),
   maxInputLength: null,
+  keyboardVerticalOffset: 0,
 };
 
 GiftedChat.propTypes = {
@@ -524,6 +526,7 @@ GiftedChat.propTypes = {
   minInputToolbarHeight: PropTypes.number,
   maxComposerHeight: PropTypes.number,
   additionalHeight: PropTypes.number,
+  keyboardVerticalOffset: PropTypes.number,
   isLoadingEarlier: PropTypes.bool,
   messageIdGenerator: PropTypes.func,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),

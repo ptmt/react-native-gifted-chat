@@ -130,6 +130,11 @@ export default class MessageContainer extends React.Component {
             transform,
           },
         ]}
+        contentContainerStyle={{
+          justifyContent: 'flex-end',
+          flex: 1,
+          paddingBottom: 70,
+        }}
         renderItem={this.renderRow}
         renderHeader={this.renderFooter}
         renderFooter={this.renderLoadEarlier}
