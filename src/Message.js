@@ -82,7 +82,7 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'flex-end',
       justifyContent: 'flex-start',
-      marginLeft: 8,
+      marginLeft: 12,
       marginRight: 0,
     },
   }),
@@ -92,7 +92,7 @@ const styles = {
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
       marginLeft: 0,
-      marginRight: 8,
+      marginRight: 12,
     },
   }),
 };
