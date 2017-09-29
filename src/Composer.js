@@ -10,7 +10,8 @@ export default class Composer extends React.Component {
       this.props.onInputSizeChanged(this.contentSize);
     } else if (
       this.contentSize.width !== contentSize.width ||
-      this.contentSize.height !== contentSize.height
+      (this.contentSize.height !== contentSize.height &&
+        Math.abs(this.contentSize.height - contentSize.height) > 10)
     ) {
       this.contentSize = contentSize;
       this.props.onInputSizeChanged(this.contentSize);
@@ -26,7 +27,7 @@ export default class Composer extends React.Component {
       <TextInput
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
-        multiline={this.props.multiline}
+        multiline={true}
         onContentSizeChange={e => this.onChange(e)}
         onChangeText={text => this.onChangeText(text)}
         style={[
