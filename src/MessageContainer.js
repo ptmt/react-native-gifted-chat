@@ -130,7 +130,7 @@ export default class MessageContainer extends React.Component {
           this.props.style,
           {
             flex: 1,
-            marginTop: Platform.OS == 'ios' ? 64 : 80,
+            marginTop: Platform.OS == 'ios' ? 64 : 0,
             transform,
           },
         ]}
