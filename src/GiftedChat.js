@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Animated,
-  Platform,
-  StyleSheet,
-  View,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { Animated, Platform, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
@@ -38,10 +32,7 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
   android: 41,
 });
 const MAX_COMPOSER_HEIGHT = 100;
-const WrapperView =
-  Platform.OS === 'android'
-    ? KeyboardAvoidingViewAndroid
-    : KeyboardAvoidingView;
+const WrapperView = Platform.OS === 'android' ? KeyboardAvoidingViewAndroid : KeyboardAvoidingView;
 
 class GiftedChat extends React.Component {
   constructor(props) {
@@ -118,10 +109,7 @@ class GiftedChat extends React.Component {
   }
 
   initLocale() {
-    if (
-      this.props.locale === null ||
-      moment.locales().indexOf(this.props.locale) === -1
-    ) {
+    if (this.props.locale === null || moment.locales().indexOf(this.props.locale) === -1) {
       this.setLocale('en');
     } else {
       this.setLocale(this.props.locale);
@@ -166,9 +154,8 @@ class GiftedChat extends React.Component {
       // @see https://developer.android.com/training/keyboard-input/visibility.html
       // So for calculate the messages container height ignore keyboard height.
       return 0;
-    } else {
-      return this._keyboardHeight;
     }
+    return this._keyboardHeight;
   }
 
   setBottomOffset(value) {
@@ -208,37 +195,25 @@ class GiftedChat extends React.Component {
   // TODO
   // setMinInputToolbarHeight
   getMinInputToolbarHeight() {
-    return this.props.renderAccessory
-      ? this.props.minInputToolbarHeight * 2
-      : this.props.minInputToolbarHeight;
+    return this.props.renderAccessory ? this.props.minInputToolbarHeight * 2 : this.props.minInputToolbarHeight;
   }
 
   calculateInputToolbarHeight(composerHeight) {
-    return (
-      composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT)
-    );
+    return composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT);
   }
 
   /**
    * Returns the height, based on current window size, without taking the keyboard into account.
    */
   getBasicMessagesContainerHeight(composerHeight = this.state.composerHeight) {
-    return (
-      this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight)
-    );
+    return this.getMaxHeight() - this.calculateInputToolbarHeight(composerHeight);
   }
 
   /**
    * Returns the height, based on current window size, taking the keyboard into account.
    */
-  getMessagesContainerHeightWithKeyboard(
-    composerHeight = this.state.composerHeight
-  ) {
-    return (
-      this.getBasicMessagesContainerHeight(composerHeight) -
-      this.getKeyboardHeight() +
-      this.getBottomOffset()
-    );
+  getMessagesContainerHeightWithKeyboard(composerHeight = this.state.composerHeight) {
+    return this.getBasicMessagesContainerHeight(composerHeight) - this.getKeyboardHeight() + this.getBottomOffset();
   }
 
   prepareMessagesContainerHeight(value) {
@@ -250,9 +225,7 @@ class GiftedChat extends React.Component {
 
   onKeyboardWillShow(e) {
     this.setIsTypingDisabled(true);
-    this.setKeyboardHeight(
-      e.endCoordinates ? e.endCoordinates.height : e.end.height
-    );
+    this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
     const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard();
     if (this.props.isAnimated === true) {
@@ -315,7 +288,7 @@ class GiftedChat extends React.Component {
         style={this.props.messageContainerStyle}
         invertibleScrollViewProps={this.invertibleScrollViewProps}
         messages={this.getMessages()}
-        ref={component => (this._messageContainerRef = component)}
+        ref={(component) => (this._messageContainerRef = component)}
       />
     );
   }
@@ -325,7 +298,7 @@ class GiftedChat extends React.Component {
       messages = [messages];
     }
 
-    messages = messages.map(message => {
+    messages = messages.map((message) => {
       return {
         ...message,
         user: this.props.user,
@@ -365,10 +338,7 @@ class GiftedChat extends React.Component {
   onInputSizeChanged(size) {
     const newComposerHeight = Math.max(
       MIN_COMPOSER_HEIGHT,
-      Math.min(
-        this.props.maxComposerHeight || MAX_COMPOSER_HEIGHT,
-        size.height + this.props.additionalHeight
-      )
+      Math.min(this.props.maxComposerHeight || MAX_COMPOSER_HEIGHT, size.height + this.props.additionalHeight),
     );
     this.setState({
       composerHeight: newComposerHeight,
@@ -395,7 +365,7 @@ class GiftedChat extends React.Component {
       onTextChanged: this.onInputTextChanged,
       textInputProps: {
         ...this.props.textInputProps,
-        ref: textInput => (this.textInput = textInput),
+        ref: (textInput) => (this.textInput = textInput),
         maxLength: this.getIsTypingDisabled() ? 0 : this.props.maxInputLength,
       },
     };
@@ -427,7 +397,7 @@ class GiftedChat extends React.Component {
 
   render() {
     return (
-      <ActionSheet ref={component => (this._actionSheetRef = component)}>
+      <ActionSheet ref={(component) => (this._actionSheetRef = component)}>
         <WrapperView
           style={styles.container}
           behavior={Platform.OS === 'android' ? 'height' : 'padding'}
@@ -521,6 +491,7 @@ GiftedChat.propTypes = {
   renderMessage: PropTypes.func,
   renderSend: PropTypes.func,
   renderTime: PropTypes.func,
+  renderAdditionalInfo: PropTypes.func,
   user: PropTypes.object,
   bottomOffset: PropTypes.number,
   minInputToolbarHeight: PropTypes.number,

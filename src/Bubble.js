@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  Text,
-  Clipboard,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-  ViewPropTypes,
-} from 'react-native';
+import { Text, Clipboard, StyleSheet, TouchableWithoutFeedback, View, ViewPropTypes } from 'react-native';
 
 import MessageText from './MessageText';
 import MessageImage from './MessageImage';
@@ -47,6 +40,13 @@ export default class Bubble extends React.Component {
     return null;
   }
 
+  renderAdditionalInfo(position) {
+    if (this.props.renderAdditionalInfo) {
+      return this.props.renderAdditionalInfo(this.props);
+    }
+    return <View style={{ backgroundColor: 'red', width: 100, height: 15 }} />;
+  }
+
   renderMessageText() {
     if (this.props.currentMessage.text) {
       const { containerStyle, wrapperStyle, ...messageTextProps } = this.props;
@@ -80,12 +80,8 @@ export default class Bubble extends React.Component {
     if (currentMessage.sent || currentMessage.received) {
       return (
         <View style={styles.tickView}>
-          {currentMessage.sent && (
-            <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>
-          )}
-          {currentMessage.received && (
-            <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>
-          )}
+          {currentMessage.sent && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
+          {currentMessage.received && <Text style={[styles.tick, this.props.tickStyle]}>✓</Text>}
         </View>
       );
     }
@@ -112,32 +108,25 @@ export default class Bubble extends React.Component {
   onLongPress() {
     if (this.props.onLongPress) {
       this.props.onLongPress(this.context, this.props.currentMessage);
-    } else {
-      if (this.props.currentMessage.text) {
-        const options = ['Copy Text', 'Cancel'];
-        const cancelButtonIndex = options.length - 1;
-        this.context.actionSheet().showActionSheetWithOptions({
-          options,
-          cancelButtonIndex,
-        }, buttonIndex => {
-          switch (buttonIndex) {
-            case 0:
-              Clipboard.setString(this.props.currentMessage.text);
-              break;
-          }
-        });
-      }
+    } else if (this.props.currentMessage.text) {
+      const options = ['Copy Text', 'Cancel'];
+      const cancelButtonIndex = options.length - 1;
+      this.context.actionSheet().showActionSheetWithOptions({
+        options,
+        cancelButtonIndex,
+      }, (buttonIndex) => {
+        switch (buttonIndex) {
+          case 0:
+            Clipboard.setString(this.props.currentMessage.text);
+            break;
+        }
+      });
     }
   }
 
   render() {
     return (
-      <View
-        style={[
-          styles[this.props.position].container,
-          this.props.containerStyle[this.props.position],
-        ]}
-      >
+      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
         <View
           style={[
             styles[this.props.position].wrapper,
@@ -158,14 +147,11 @@ export default class Bubble extends React.Component {
             </View>
           </TouchableWithoutFeedback>
         </View>
-        <View
-          style={[
-            styles.bottom,
-            this.props.bottomContainerStyle[this.props.position],
-          ]}
-        >
+        <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
+          {this.props.position === 'right' ? this.renderAdditionalInfo() : null}
           {this.renderTicks()}
           {this.renderTime()}
+          {this.props.position === 'left' ? this.renderAdditionalInfo() : null}
         </View>
       </View>
     );
@@ -218,6 +204,7 @@ const styles = {
     justifyContent: 'flex-end',
     marginTop: 4,
     marginBottom: 4,
+    maxWidth: '80%',
   },
   tick: {
     fontSize: 10,
@@ -256,7 +243,7 @@ Bubble.defaultProps = {
   tickStyle: {},
   containerToNextStyle: {},
   containerToPreviousStyle: {},
-  //TODO: remove in next major release
+  // TODO: remove in next major release
   isSameDay: warnDeprecated(isSameDay),
   isSameUser: warnDeprecated(isSameUser),
 };
@@ -293,7 +280,7 @@ Bubble.propTypes = {
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  //TODO: remove in next major release
+  // TODO: remove in next major release
   isSameDay: PropTypes.func,
   isSameUser: PropTypes.func,
 };
