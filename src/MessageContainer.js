@@ -8,10 +8,7 @@ import md5 from 'md5';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
-const transform =
-  Platform.OS === 'android'
-    ? [{ scaleY: -1 }, { perspective: 1280 }]
-    : [{ scaleY: -1 }];
+const transform = Platform.OS === 'android' ? [{ scaleY: -1 }, { perspective: 1280 }] : [{ scaleY: -1 }];
 
 export default class MessageContainer extends React.Component {
   constructor(props) {
@@ -63,16 +60,10 @@ export default class MessageContainer extends React.Component {
 
   renderRow({ item, index }) {
     if (!item._id && item._id !== 0) {
-      console.warn(
-        'GiftedChat: `_id` is missing for message',
-        JSON.stringify(item)
-      );
+      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
     }
     if (!item.user) {
-      console.warn(
-        'GiftedChat: `user` is missing for message',
-        JSON.stringify(item)
-      );
+      console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
       item.user = {};
     }
 
@@ -125,7 +116,6 @@ export default class MessageContainer extends React.Component {
         {...this.props.listViewProps}
         data={this.props.messages}
         keyExtractor={(item, index) => item._id}
-        inverted={true}
         style={[
           this.props.style,
           {
@@ -136,7 +126,6 @@ export default class MessageContainer extends React.Component {
         ]}
         contentContainerStyle={{
           justifyContent: 'flex-end',
-          minHeight: '80%',
         }}
         renderItem={this.renderRow}
         renderHeader={this.renderFooter}
