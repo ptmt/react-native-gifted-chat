@@ -125,7 +125,6 @@ export default class MessageContainer extends React.Component {
         {...this.props.listViewProps}
         data={this.props.messages}
         keyExtractor={(item, index) => item._id}
-        inverted={true}
         style={[
           this.props.style,
           {
@@ -136,7 +135,6 @@ export default class MessageContainer extends React.Component {
         ]}
         contentContainerStyle={{
           justifyContent: 'flex-end',
-          minHeight: '80%',
         }}
         renderItem={this.renderRow}
         renderHeader={this.renderFooter}
