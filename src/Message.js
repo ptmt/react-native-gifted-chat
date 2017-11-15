@@ -40,6 +40,9 @@ export default class Message extends React.Component {
   renderAvatar() {
     if (this.props.user._id !== this.props.currentMessage.user._id) {
       const avatarProps = this.getInnerComponentProps();
+      if (this.props.renderAvatar) {
+        return this.props.renderAvatar(avatarProps);
+      }
       return <Avatar {...avatarProps} />;
     }
     return null;
@@ -57,12 +60,7 @@ export default class Message extends React.Component {
           style={[
             styles[this.props.position].container,
             {
-              marginBottom: isSameUser(
-                this.props.currentMessage,
-                this.props.nextMessage
-              )
-                ? 2
-                : 10,
+              marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
             },
             this.props.containerStyle[this.props.position],
           ]}
