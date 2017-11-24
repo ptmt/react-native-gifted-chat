@@ -25,6 +25,7 @@ export default class Composer extends React.Component {
   render() {
     return (
       <TextInput
+        testID="ComposerTextInput"
         placeholder={this.props.placeholder}
         placeholderTextColor={this.props.placeholderTextColor}
         multiline={true}
