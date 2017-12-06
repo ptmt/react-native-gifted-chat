@@ -52,6 +52,7 @@ class GiftedChat extends React.Component {
       composerHeight: MIN_COMPOSER_HEIGHT,
       messagesContainerHeight: null,
       typingDisabled: false,
+      text: props.initialComposerText,
     };
 
     this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
@@ -501,6 +502,7 @@ GiftedChat.propTypes = {
   isLoadingEarlier: PropTypes.bool,
   messageIdGenerator: PropTypes.func,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
+  initialComposerText: PropTypes.string,
 };
 
 export {
