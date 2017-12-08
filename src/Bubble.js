@@ -44,7 +44,7 @@ export default class Bubble extends React.Component {
     if (this.props.renderAdditionalInfo) {
       return this.props.renderAdditionalInfo(this.props);
     }
-    return <View style={{ backgroundColor: 'red', width: 100, height: 15 }} />;
+    return null;
   }
 
   renderMessageText() {
@@ -111,16 +111,19 @@ export default class Bubble extends React.Component {
     } else if (this.props.currentMessage.text) {
       const options = ['Copy Text', 'Cancel'];
       const cancelButtonIndex = options.length - 1;
-      this.context.actionSheet().showActionSheetWithOptions({
-        options,
-        cancelButtonIndex,
-      }, (buttonIndex) => {
-        switch (buttonIndex) {
-          case 0:
-            Clipboard.setString(this.props.currentMessage.text);
-            break;
-        }
-      });
+      this.context.actionSheet().showActionSheetWithOptions(
+        {
+          options,
+          cancelButtonIndex,
+        },
+        (buttonIndex) => {
+          switch (buttonIndex) {
+            case 0:
+              Clipboard.setString(this.props.currentMessage.text);
+              break;
+          }
+        },
+      );
     }
   }
 
