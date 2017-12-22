@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FlatList, View, Platform } from 'react-native';
+import { FlatList, View, Text, Platform } from 'react-native';
 
 import shallowequal from 'shallowequal';
 import md5 from 'md5';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
-
-const transform = Platform.OS === 'android' ? [{ scaleY: -1 }, { perspective: 1280 }] : [{ scaleY: -1 }];
 
 export default class MessageContainer extends React.Component {
   constructor(props) {
@@ -84,11 +82,7 @@ export default class MessageContainer extends React.Component {
     if (this.props.renderMessage) {
       return this.props.renderMessage(messageProps);
     }
-    return (
-      <View style={{ transform }}>
-        <Message {...messageProps} />
-      </View>
-    );
+    return <Message {...messageProps} />;
   }
 
   renderHeaderWrapper = () => {
@@ -105,23 +99,21 @@ export default class MessageContainer extends React.Component {
         />
       );
     }
+
     return (
       <FlatList
-        ref={ref => (this.flatListRef = ref)}
-        enableEmptySections={true}
+        ref={(ref) => (this.flatListRef = ref)}
+        initialNumToRender={8}
+        maxToRenderPerBatch={1}
         removeClippedSubviews={true}
-        automaticallyAdjustContentInsets={false}
-        initialListSize={5}
-        pageSize={1}
         {...this.props.listViewProps}
         data={this.props.messages}
         keyExtractor={(item, index) => item._id}
+        inverted={true}
         style={[
           this.props.style,
           {
             flex: 1,
-            marginTop: Platform.OS == 'ios' ? 64 : 0,
-            transform,
           },
         ]}
         contentContainerStyle={{
