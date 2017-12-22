@@ -44,7 +44,7 @@ export default class Bubble extends React.Component {
     if (this.props.renderAdditionalInfo) {
       return this.props.renderAdditionalInfo(this.props);
     }
-    return null;
+    return <View style={{ backgroundColor: 'red', width: 100, height: 15 }} />;
   }
 
   renderMessageText() {
@@ -129,7 +129,7 @@ export default class Bubble extends React.Component {
 
   render() {
     return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+      <View>
         <View
           style={[
             styles[this.props.position].wrapper,
@@ -170,7 +170,7 @@ const styles = {
     wrapper: {
       backgroundColor: '#ececec',
       marginRight: 60,
-      minHeight: 20,
+      //  minHeight: 20,
       minWidth: 100,
       paddingRight: 0,
       justifyContent: 'flex-end',
@@ -195,7 +195,7 @@ const styles = {
       borderBottomRightRadius: 0,
       backgroundColor: '#1ab7f3',
       marginLeft: 60,
-      minHeight: 20,
+      // minHeight: 20,
       minWidth: 100,
       justifyContent: 'flex-end',
     },
