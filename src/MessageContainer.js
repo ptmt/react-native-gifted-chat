@@ -4,27 +4,17 @@ import React from 'react';
 import { FlatList, View, Text, Platform } from 'react-native';
 
 import shallowequal from 'shallowequal';
-import md5 from 'md5';
+import hash from 'quick-hash';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
-export default class MessageContainer extends React.Component {
+export default class MessageContainer extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.renderRow = this.renderRow.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.messages.length !== nextProps.messages.length) {
-      return true;
-    }
-    if (!shallowequal(this.props, nextProps)) {
-      return true;
-    }
-    return false;
   }
 
   renderFooter() {
@@ -58,10 +48,16 @@ export default class MessageContainer extends React.Component {
 
   renderRow({ item, index }) {
     if (!item._id && item._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
+      console.warn(
+        'GiftedChat: `_id` is missing for message',
+        JSON.stringify(item)
+      );
     }
     if (!item.user) {
-      console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
+      console.warn(
+        'GiftedChat: `user` is missing for message',
+        JSON.stringify(item)
+      );
       item.user = {};
     }
 
@@ -75,7 +71,12 @@ export default class MessageContainer extends React.Component {
       currentMessage: item,
       previousMessage,
       nextMessage,
-      hash: md5(JSON.stringify(item) + previousMessage._id + nextMessage._id),
+      hash: hash(
+        item.body.length +
+          JSON.stringify(item.attributes) +
+          previousMessage._id +
+          nextMessage._id
+      ),
       position: item.user._id === this.props.user._id ? 'right' : 'left',
     };
 
@@ -102,7 +103,7 @@ export default class MessageContainer extends React.Component {
 
     return (
       <FlatList
-        ref={(ref) => (this.flatListRef = ref)}
+        ref={ref => (this.flatListRef = ref)}
         initialNumToRender={8}
         maxToRenderPerBatch={1}
         removeClippedSubviews={true}
