@@ -72,7 +72,7 @@ export default class MessageContainer extends React.PureComponent {
       previousMessage,
       nextMessage,
       hash: hash(
-        item.body.length +
+        (item.body ? item.body.length : 0) +
           JSON.stringify(item.attributes) +
           previousMessage._id +
           nextMessage._id
