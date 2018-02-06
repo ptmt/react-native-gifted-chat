@@ -503,6 +503,7 @@ GiftedChat.propTypes = {
   messageIdGenerator: PropTypes.func,
   keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
   initialComposerText: PropTypes.string,
+  messagePropsToHash: PropTypes.func,
 };
 
 export {

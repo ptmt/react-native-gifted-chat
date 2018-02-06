@@ -48,16 +48,10 @@ export default class MessageContainer extends React.PureComponent {
 
   renderRow({ item, index }) {
     if (!item._id && item._id !== 0) {
-      console.warn(
-        'GiftedChat: `_id` is missing for message',
-        JSON.stringify(item)
-      );
+      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
     }
     if (!item.user) {
-      console.warn(
-        'GiftedChat: `user` is missing for message',
-        JSON.stringify(item)
-      );
+      console.warn('GiftedChat: `user` is missing for message', JSON.stringify(item));
       item.user = {};
     }
 
@@ -65,18 +59,17 @@ export default class MessageContainer extends React.PureComponent {
     const previousMessage = messages[index + 1] || {};
     const nextMessage = messages[index - 1] || {};
 
+    const messageHash = this.props.messagePropsToHash
+      ? hash(this.props.messagePropsToHash(item) + previousMessage._id + nextMessage._id)
+      : hash(item.body.length + JSON.stringify(item.attributes) + previousMessage._id + nextMessage._id);
+
     const messageProps = {
       ...restProps,
       key: item._id,
       currentMessage: item,
       previousMessage,
       nextMessage,
-      hash: hash(
-        (item.body ? item.body.length : 0) +
-          JSON.stringify(item.attributes) +
-          previousMessage._id +
-          nextMessage._id
-      ),
+      hash: messageHash,
       position: item.user._id === this.props.user._id ? 'right' : 'left',
     };
 
@@ -103,7 +96,7 @@ export default class MessageContainer extends React.PureComponent {
 
     return (
       <FlatList
-        ref={ref => (this.flatListRef = ref)}
+        ref={(ref) => (this.flatListRef = ref)}
         initialNumToRender={8}
         maxToRenderPerBatch={1}
         removeClippedSubviews={true}
@@ -145,4 +138,5 @@ MessageContainer.propTypes = {
   renderMessage: PropTypes.func,
   onLoadEarlier: PropTypes.func,
   listViewProps: PropTypes.object,
+  messagePropsToHash: PropTypes.func,
 };
