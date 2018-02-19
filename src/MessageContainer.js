@@ -114,9 +114,8 @@ export default class MessageContainer extends React.PureComponent {
           justifyContent: 'flex-end',
         }}
         renderItem={this.renderRow}
-        renderHeader={this.renderFooter}
-        renderFooter={this.renderLoadEarlier}
-        ListHeaderComponent={this.renderHeaderWrapper}
+        ListFooterComponent={this.renderLoadEarlier}
+        ListHeaderComponent={this.props.renderFooter}
       />
     );
   }
