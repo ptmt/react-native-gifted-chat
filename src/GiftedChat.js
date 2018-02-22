@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animated, Platform, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { Animated, Platform, StyleSheet, View, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
@@ -407,7 +407,7 @@ class GiftedChat extends React.Component {
         >
           {this.renderMessages()}
           {this.renderChatFooter()}
-          {this.renderInputToolbar()}
+          <SafeAreaView>{this.renderInputToolbar()}</SafeAreaView>
         </WrapperView>
       </ActionSheet>
     );
