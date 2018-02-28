@@ -102,7 +102,7 @@ export default class MessageContainer extends React.PureComponent {
         removeClippedSubviews={true}
         {...this.props.listViewProps}
         data={this.props.messages}
-        keyExtractor={(item, index) => item._id}
+        keyExtractor={(item, index) => item._id.toString()}
         inverted={true}
         style={[
           this.props.style,
