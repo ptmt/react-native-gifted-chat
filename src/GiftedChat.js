@@ -337,7 +337,6 @@ class GiftedChat extends React.Component {
   }
 
   onInputSizeChanged(size) {
-    console.log(size.height, this.props.additionalHeight);
     const newComposerHeight = Math.max(
       MIN_COMPOSER_HEIGHT,
       Math.min(this.props.maxComposerHeight || MAX_COMPOSER_HEIGHT, size.height + this.props.additionalHeight),
@@ -400,7 +399,6 @@ class GiftedChat extends React.Component {
   }
 
   render() {
-    console.log(this.props, this.state);
     return (
       <ActionSheet ref={(component) => (this._actionSheetRef = component)}>
         <WrapperView
